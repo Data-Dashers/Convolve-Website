@@ -83,7 +83,7 @@
           e.preventDefault()
           let product_id = document.getElementById("product_id").value
           let date = document.getElementById("date").value
-          console.log(product_id, date)
+          // console.log(product_id, date)
           fetch("http://127.0.0.1:8000/get_preds/",{
             method: "POST",
             headers: {
@@ -98,13 +98,14 @@
           )
           .then(res => res.json())
           .then(res => {
-              console.log(res)
+              // console.log(res)
               data = res
               labels_data = data.dates
               values_data = data.preds
               values_old_data = data.old_preds
+              sizes = data.sizes
 
-              console.log(labels_data, values_data, values_old_data)
+              // console.log(labels_data, values_data, values_old_data)
             
               let chart = new Chart(ctx, {
                   type: "line",
@@ -131,7 +132,15 @@
                     title: {
                         text: `Number of products Sold of ${product_id}`,
                         display: true
-                    }
+                    },
+                    tooltips: {
+                      callbacks: {
+                          afterBody: function(context) {
+                            console.log(context, sizes[context[0].label])
+                            return `size: ${Sizes[context[0].label]}`; //return a string that you wish to append
+                          }
+                      }
+                    },
                   } 
                 });
         })
