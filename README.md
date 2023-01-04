@@ -3,7 +3,7 @@
 ## Project Description:
 
 - This is python project to forecast sales of different products.
-- Technologies used - Django, ChartJS, Django-Rest_Framework
+- Technologies used - Django, ChartJS, Django-Rest-Framework
 - This project was done for the second round of Convolve Competition organized by Cisco.
 
 
