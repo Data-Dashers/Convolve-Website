@@ -22,7 +22,7 @@
       </div>
       <div class="container">
         <div class="row">
-          <form class="col-5 border border-dark rounded p-5 m-5" method="post" id="form">
+          <form class="col-3 border border-dark rounded p-5 m-5" method="post" id="form">
             {% csrf_token %}
             <select class="mb-3 form-select" aria-label="Default select example" name="product_id" id="product_id">
               <option selected disabled>Product ID</option>
@@ -48,7 +48,7 @@
               <button type="submit" class="btn btn-outline-info">Submit</button>
             </div>
           </form>
-          <div class="col-5">
+          <div class="col-8">
             <canvas id="chart" width="500" height="500"></canvas>
           </div>
         </div>
@@ -102,7 +102,9 @@
               data = res
               labels_data = data.dates
               values_data = data.preds
-              console.log(labels_data, values_data)
+              values_old_data = data.old_preds
+
+              console.log(labels_data, values_data, values_old_data)
             
               let chart = new Chart(ctx, {
                   type: "line",
@@ -110,10 +112,18 @@
                     labels: labels_data,
                     datasets: [
                         {
-                          label: "Quantity Sold",
+                          label: "Forecasted Sold Quantity",
                           backgroundColor: "#79AEC8",
                           borderColor: "#417690",
-                          data: values_data
+                          data: values_data,
+                          order: 2,
+                        },
+                        {
+                          label: "Old Sold Quantity",
+                          backgroundColor: "#919191",
+                          borderColor: "#615e5e",
+                          data: values_old_data,
+                          order:1
                         }
                     ]
                   },
