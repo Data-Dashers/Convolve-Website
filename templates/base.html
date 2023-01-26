@@ -95,7 +95,7 @@
         let product_id = document.getElementById("product_id").value;
         let date = document.getElementById("date").value;
         console.log(product_id, date);
-        fetch("http://127.0.0.1:8000/get_preds/", {
+        fetch("https://convolve.azurewebsites.net/get_preds/", {
           method: "POST",
           headers: {
             "Content-type": "application/json",
